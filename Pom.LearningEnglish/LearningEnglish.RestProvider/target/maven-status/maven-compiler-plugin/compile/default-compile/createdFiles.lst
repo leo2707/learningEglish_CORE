@@ -1,0 +1,6 @@
+co\com\powersoft\learningenglish\restprovider\service\ServiceBean.class
+co\com\powersoft\learningenglish\restprovider\controller\Controller.class
+co\com\powersoft\learningenglish\restprovider\filter\SecurityFilter.class
+co\com\powersoft\learningenglish\restprovider\service\ValidationUtil.class
+co\com\powersoft\learningenglish\restprovider\constants\OperationConstants.class
+co\com\powersoft\learningenglish\restprovider\service\IServiceBean.class
