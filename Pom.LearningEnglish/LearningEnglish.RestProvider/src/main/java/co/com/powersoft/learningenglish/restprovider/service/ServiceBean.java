@@ -24,6 +24,7 @@ import co.com.powersoft.learningenglish.util.bean.util.StatusUtil;
 import co.com.powersoft.learningenglish.util.exceptionmanager.exception.GeneralException;
 import co.com.powersoft.learningenglish.util.exceptionmanager.util.ErrorUtil;
 import co.com.powersoft.learningenglish.util.logger.print.PrintLogger;
+
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -47,12 +48,9 @@ import javax.ws.rs.core.MediaType;
 public class ServiceBean implements IServiceBean{
     
     private static ServiceBean instance;
-    
-//    @Inject
-//    private Validator validator;
-    
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    Validator validator = factory.getValidator();
+    Validator validator = factory.getValidator();   
+    
     
     /**
      * Devuelve la instancia de la clase
@@ -62,7 +60,7 @@ public class ServiceBean implements IServiceBean{
      */
     public static ServiceBean getInstance() {
         if (null == instance) {
-            instance = new ServiceBean();
+            instance = new ServiceBean();            
         }
         return instance;
     }
@@ -91,22 +89,22 @@ public class ServiceBean implements IServiceBean{
         GetAllThemesRs response = new GetAllThemesRs();
         
         //Logger REQUEST
-        PrintLogger.printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(OPERACION, request);
 
         try {
             response = Controller.getInstance().getAllThemes(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         }
         return response;
     }
@@ -129,7 +127,7 @@ public class ServiceBean implements IServiceBean{
         GetLessonRs response = new GetLessonRs();
         
         //Logger REQUEST
-        PrintLogger.printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(OPERACION, request);
 
         try {
             //Validate request
@@ -139,18 +137,18 @@ public class ServiceBean implements IServiceBean{
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (ConstraintViolationException e) {
             response.setStatus(StatusUtil.getStatusErrorInvalidRequest());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), ValidationUtil.getViolations(e.getConstraintViolations())));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), ValidationUtil.getViolations(e.getConstraintViolations())));
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         }
         return response;
     }
@@ -173,22 +171,22 @@ public class ServiceBean implements IServiceBean{
         GetVocabularyRs response = new GetVocabularyRs();
         
         //Logger REQUEST
-        PrintLogger.printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(OPERACION, request);
 
         try {
             response = Controller.getInstance().getVocabulary(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         }
         return response;
     }
@@ -211,22 +209,22 @@ public class ServiceBean implements IServiceBean{
         GetVerbsRs response = new GetVerbsRs();
         
         //Logger REQUEST
-        PrintLogger.printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(OPERACION, request);
 
         try {
             response = Controller.getInstance().getVerbs(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         }
         return response;
     }
@@ -249,22 +247,22 @@ public class ServiceBean implements IServiceBean{
         GetWritingExamRs response = new GetWritingExamRs();
         
         //Logger REQUEST
-        PrintLogger.printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(OPERACION, request);
 
         try {
             response = Controller.getInstance().getWritingExam(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         }
         return response;
     }
@@ -287,22 +285,22 @@ public class ServiceBean implements IServiceBean{
         GetMultichoiceExamRs response = new GetMultichoiceExamRs();
         
         //Logger REQUEST
-        PrintLogger.printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(OPERACION, request);
 
         try {
             response = Controller.getInstance().getMultichoiceExam(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         }
         return response;
     }

@@ -27,6 +27,12 @@
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>LearningEnglish.Util.Utilities</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
         
         <dependency>
             <groupId>org.jboss.resteasy</groupId>

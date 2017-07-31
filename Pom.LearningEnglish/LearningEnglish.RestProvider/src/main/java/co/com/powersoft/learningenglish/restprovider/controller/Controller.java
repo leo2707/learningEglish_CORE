@@ -373,26 +373,6 @@ public class Controller {
             throw new GeneralException(GeneralException.EXCEPTION_TYPE_GENERIC, OPERACION, request.getRequestId(), e);
         }
         return response;
-    }
-
-    public static void main(String[] args) {
-        try {
-            String OPERACION = "GET_THEMES";
-
-            GetAllThemesRq request = new GetAllThemesRq();
-            request.setRequestDate(new Date());
-            request.setRequestId("123456789");
-            request.setUserId("lsolano");
-
-            //Logger REQUEST
-//            PrintLogger.printRequest(OPERACION, request);
-            GetAllThemesRs response = Controller.getInstance().getAllThemes(request);
-
-            //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+    }   
 
 }

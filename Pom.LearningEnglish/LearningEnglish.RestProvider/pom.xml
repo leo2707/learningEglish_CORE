@@ -63,6 +63,12 @@
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CustomLogger</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
         
 <!--        <dependency>
     <groupId>org.hibernate</groupId>

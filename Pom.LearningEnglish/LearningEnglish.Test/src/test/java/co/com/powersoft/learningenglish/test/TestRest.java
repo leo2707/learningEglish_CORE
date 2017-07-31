@@ -16,6 +16,7 @@ import co.com.powersoft.learningenglish.bean.model.GetWritingExamRq;
 import co.com.powersoft.learningenglish.bean.model.GetWritingExamRs;
 import co.com.powersoft.learningenglish.util.UtilRest;
 import co.com.powersoft.learningenglish.util.logger.print.PrintLogger;
+import co.com.powersoft.learningenglish.util.utilities.Utilities;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -67,12 +68,12 @@ public class TestRest {
             request.setUserId("lsolano");
 
             //Logger REQUEST
-            PrintLogger.printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(OPERACION, request);
 
             GetAllThemesRs response = (GetAllThemesRs) UtilRest.getResponse(endpoint, request, GetAllThemesRs.class);
 
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -88,17 +89,19 @@ public class TestRest {
         try {
             GetLessonRq request = new GetLessonRq();
             request.setRequestDate(new Date());
-            request.setRequestId("123456789");
+            request.setRequestId(Utilities.generateRequestID());
+            request.setAppOrigin("App Test");
+            request.setIpOrigin(Utilities.getLocalIpAddress());
             request.setUserId("lsolano");
             request.setLessonId("1_1");
 
             //Logger REQUEST
-            PrintLogger.printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(OPERACION, request);
 
             GetLessonRs response = (GetLessonRs) UtilRest.getResponse(endpoint, request, GetLessonRs.class);
 
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -128,12 +131,12 @@ public class TestRest {
             request.setConfigExam(configExam);
 
             //Logger REQUEST
-            PrintLogger.printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(OPERACION, request);
 
             GetWritingExamRs response = (GetWritingExamRs) UtilRest.getResponse(endpoint, request, GetWritingExamRs.class);
 
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -163,12 +166,12 @@ public class TestRest {
             request.setConfigExam(configExam);
 
             //Logger REQUEST
-            PrintLogger.printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(OPERACION, request);
 
             GetMultichoiceExamRs response = (GetMultichoiceExamRs) UtilRest.getResponse(endpoint, request, GetMultichoiceExamRs.class);
 
             //Logger RESPONSE
-            PrintLogger.printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }

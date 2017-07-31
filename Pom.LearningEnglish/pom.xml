@@ -15,6 +15,7 @@
         <module>LearningEnglish.Util.Utilities</module>
         <module>LearningEnglish.Test</module>
         <module>LearningEnglish.Util.Exam</module>
+        <module>CustomLogger</module>
     </modules>
     
     <properties>

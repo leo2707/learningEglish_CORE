@@ -21,6 +21,8 @@ public class GenericRequest implements Serializable{
     
     private String requestId;
     private Date requestDate;
+    private String appOrigin;
+    private String ipOrigin;
     private String userId;
 
     public String getRequestId() {
@@ -37,6 +39,22 @@ public class GenericRequest implements Serializable{
 
     public void setRequestDate(Date requestDate) {
         this.requestDate = requestDate;
+    }
+
+    public String getAppOrigin() {
+        return appOrigin;
+    }
+
+    public void setAppOrigin(String appOrigin) {
+        this.appOrigin = appOrigin;
+    }
+
+    public String getIpOrigin() {
+        return ipOrigin;
+    }
+
+    public void setIpOrigin(String ipOrigin) {
+        this.ipOrigin = ipOrigin;
     }
 
     public String getUserId() {
