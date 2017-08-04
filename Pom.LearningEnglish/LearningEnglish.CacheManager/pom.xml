@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>Pom.LearningEnglish</artifactId>
-    <groupId>co.com.powersoft.learningenglish</groupId>
-    <version>1.0</version>
-  </parent>
+        <artifactId>Pom.LearningEnglish</artifactId>
+        <groupId>co.com.powersoft.learningenglish</groupId>
+        <version>1.0</version>
+    </parent>
 
     <groupId>co.com.powersoft.learningenglish</groupId>
-    <artifactId>LearningEnglish.RestProvider</artifactId>
+    <artifactId>LearningEnglish.CacheManager</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>LearningEnglish.RestProvider</name>
+    <name>LearningEnglish.CacheManager</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -21,71 +21,15 @@
     
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>LearningEnglish.Bean</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <version>9.1.0.Final</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>LearningEnglish.QueryManager</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-commons</artifactId>
+            <version>9.1.0.Final</version>
         </dependency>
-        <!--UTIL-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>LearningEnglish.Util.Bean</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>LearningEnglish.Util.Exam</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>LearningEnglish.Util.ExceptionManager</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>LearningEnglish.Util.Logger</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>LearningEnglish.Util.Utilities</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CustomLogger</artifactId>
-            <version>${project.version}</version>
-            <type>jar</type>
-        </dependency>
-        
-<!--        <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-validator</artifactId>
-    <version>5.2.1.Final</version>
-</dependency>-->
-
-<dependency>
-  <groupId>org.infinispan</groupId>
-  <artifactId>infinispan-core</artifactId>
-  <version>9.1.0.Final</version>
-</dependency>
-<dependency>
-    <groupId>org.infinispan</groupId>
-    <artifactId>infinispan-commons</artifactId>
-    <version>9.1.0.Final</version>
-</dependency>
         
         <dependency>
             <groupId>javax</groupId>

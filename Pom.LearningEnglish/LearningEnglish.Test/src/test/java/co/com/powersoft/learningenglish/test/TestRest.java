@@ -17,6 +17,7 @@ import co.com.powersoft.learningenglish.bean.model.GetWritingExamRs;
 import co.com.powersoft.learningenglish.util.UtilRest;
 import co.com.powersoft.learningenglish.util.logger.print.PrintLogger;
 import co.com.powersoft.learningenglish.util.utilities.Utilities;
+import co.com.powersoft.logger.CustomLogger;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -33,6 +34,7 @@ public class TestRest {
     
     private static final String ENDPOINT = "http://localhost:8080/RestProvider/rest/learningEnglish/";
     private static final String SLASH = "/";
+    CustomLogger logger = new CustomLogger(this.getClass());
     
     public TestRest() {
     }
@@ -68,12 +70,12 @@ public class TestRest {
             request.setUserId("lsolano");
 
             //Logger REQUEST
-            PrintLogger.getInstance().printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
             GetAllThemesRs response = (GetAllThemesRs) UtilRest.getResponse(endpoint, request, GetAllThemesRs.class);
 
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -96,12 +98,12 @@ public class TestRest {
             request.setLessonId("1_1");
 
             //Logger REQUEST
-            PrintLogger.getInstance().printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
             GetLessonRs response = (GetLessonRs) UtilRest.getResponse(endpoint, request, GetLessonRs.class);
 
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -131,12 +133,12 @@ public class TestRest {
             request.setConfigExam(configExam);
 
             //Logger REQUEST
-            PrintLogger.getInstance().printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
             GetWritingExamRs response = (GetWritingExamRs) UtilRest.getResponse(endpoint, request, GetWritingExamRs.class);
 
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -166,12 +168,12 @@ public class TestRest {
             request.setConfigExam(configExam);
 
             //Logger REQUEST
-            PrintLogger.getInstance().printRequest(OPERACION, request);
+            PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
             GetMultichoiceExamRs response = (GetMultichoiceExamRs) UtilRest.getResponse(endpoint, request, GetMultichoiceExamRs.class);
 
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         } catch (Exception e) {
             System.out.println(e);
         }

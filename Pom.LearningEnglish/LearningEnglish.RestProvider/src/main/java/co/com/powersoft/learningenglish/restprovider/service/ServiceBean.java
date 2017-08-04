@@ -24,6 +24,8 @@ import co.com.powersoft.learningenglish.util.bean.util.StatusUtil;
 import co.com.powersoft.learningenglish.util.exceptionmanager.exception.GeneralException;
 import co.com.powersoft.learningenglish.util.exceptionmanager.util.ErrorUtil;
 import co.com.powersoft.learningenglish.util.logger.print.PrintLogger;
+import co.com.powersoft.logger.CustomLogger;
+import javax.annotation.Resource;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
@@ -36,6 +38,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.infinispan.Cache;
 
 /**
  *
@@ -47,9 +50,14 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class ServiceBean implements IServiceBean{
     
+    @Resource(lookup = "java:jboss/infinispan/cache/monitor/default")
+    private Cache<String, String> cache;
+    
     private static ServiceBean instance;
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     Validator validator = factory.getValidator();   
+    CustomLogger logger = new CustomLogger(this.getClass());
+//    private PrintLogger logger = new PrintLogger(this.getClass());
     
     
     /**
@@ -69,6 +77,8 @@ public class ServiceBean implements IServiceBean{
     @Path("/prueba")
     public void prueba(){        
             System.out.println("HOLA ENTRO AL REST");
+            System.out.println("Value in the cache:" + cache);
+            cache.put("1", "leo"); // Add a entry
     }
     
     /**
@@ -83,28 +93,30 @@ public class ServiceBean implements IServiceBean{
     @Path("/getAllThemes")
     @Override    
     public GetAllThemesRs getAllThemes(GetAllThemesRq request){
+        
+        
 
         //Nombre de la operación
         String OPERACION = OperationConstants.GET_ALL_THEMES;
         GetAllThemesRs response = new GetAllThemesRs();
         
         //Logger REQUEST
-        PrintLogger.getInstance().printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
         try {
             response = Controller.getInstance().getAllThemes(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         }
         return response;
     }
@@ -121,13 +133,13 @@ public class ServiceBean implements IServiceBean{
     @Path("/getLesson")
     @Override    
     public GetLessonRs getLesson(GetLessonRq request){
-
+        
         //Nombre de la operación
         String OPERACION = OperationConstants.GET_LESSON;
         GetLessonRs response = new GetLessonRs();
         
         //Logger REQUEST
-        PrintLogger.getInstance().printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
         try {
             //Validate request
@@ -137,18 +149,18 @@ public class ServiceBean implements IServiceBean{
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (ConstraintViolationException e) {
             response.setStatus(StatusUtil.getStatusErrorInvalidRequest());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), ValidationUtil.getViolations(e.getConstraintViolations())));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), ValidationUtil.getViolations(e.getConstraintViolations())));
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         }
         return response;
     }
@@ -171,22 +183,22 @@ public class ServiceBean implements IServiceBean{
         GetVocabularyRs response = new GetVocabularyRs();
         
         //Logger REQUEST
-        PrintLogger.getInstance().printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
         try {
             response = Controller.getInstance().getVocabulary(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         }
         return response;
     }
@@ -209,22 +221,22 @@ public class ServiceBean implements IServiceBean{
         GetVerbsRs response = new GetVerbsRs();
         
         //Logger REQUEST
-        PrintLogger.getInstance().printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
         try {
             response = Controller.getInstance().getVerbs(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         }
         return response;
     }
@@ -247,22 +259,22 @@ public class ServiceBean implements IServiceBean{
         GetWritingExamRs response = new GetWritingExamRs();
         
         //Logger REQUEST
-        PrintLogger.getInstance().printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
         try {
             response = Controller.getInstance().getWritingExam(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         }
         return response;
     }
@@ -285,22 +297,22 @@ public class ServiceBean implements IServiceBean{
         GetMultichoiceExamRs response = new GetMultichoiceExamRs();
         
         //Logger REQUEST
-        PrintLogger.getInstance().printRequest(OPERACION, request);
+        PrintLogger.getInstance().printRequest(logger, OPERACION, request);
 
         try {
             response = Controller.getInstance().getMultichoiceExam(request);
             response.setStatus(StatusUtil.getStatusSuccess());
         } catch (GeneralException e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
          } catch (Exception e) {
             response.setStatus(StatusUtil.getStatusError());
-            PrintLogger.getInstance().printError(ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
+            PrintLogger.getInstance().printError(logger, ErrorUtil.getInstance().getErrorData(e, OPERACION, request.getRequestId(), null));
         } finally {
             //Mapeamos las variables generales
             response.setRequestId(request.getRequestId());
             //Logger RESPONSE
-            PrintLogger.getInstance().printResponse(OPERACION, response);
+            PrintLogger.getInstance().printResponse(logger, OPERACION, response);
         }
         return response;
     }

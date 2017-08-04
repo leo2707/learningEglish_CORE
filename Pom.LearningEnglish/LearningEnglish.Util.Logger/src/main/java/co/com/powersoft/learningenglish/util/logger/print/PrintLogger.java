@@ -6,8 +6,10 @@
 package co.com.powersoft.learningenglish.util.logger.print;
 
 import co.com.powersoft.learningenglish.util.logger.bean.ErrorData;
-//import co.com.powersoft.learningenglish.util.logger.config.CustomLogger;
 import co.com.powersoft.logger.CustomLogger;
+//import co.com.powersoft.logger.config.CustomLogger;
+//import co.com.powersoft.learningenglish.util.logger.config.CustomLogger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,10 +23,8 @@ public class PrintLogger {
     
 //    private CustomLogger logger = new CustomLogger(this.getClass());
     private static PrintLogger instance;
-    private static CustomLogger logger;
     
     public PrintLogger() {
-        logger = new CustomLogger(this.getClass());
     }
     
     /**
@@ -98,10 +98,11 @@ public class PrintLogger {
      * Metodo que permite imprimir un REQUEST de un objeto en json
      * 
      * @autor Leonardo Solano
+     * @param logger (CustomLogger) Objeto logger
      * @param nombreMetodo (String) nombre del metodo
      * @param object Objeto que convertiremos en JSON
      */
-    public void printRequest(String nombreMetodo, Object object){
+    public void printRequest(CustomLogger logger, String nombreMetodo, Object object){
         System.out.println("SYSOUT LEO: "+getRequestJson(nombreMetodo, object));
         logger.info("LOG LEO: "+getRequestJson(nombreMetodo, object));
     }
@@ -110,10 +111,11 @@ public class PrintLogger {
      * Metodo que permite imprimir un RESPONSE de un objeto en json
      *
      * @autor Leonardo Solano
+     * @param logger (CustomLogger) Objeto logger
      * @param nombreMetodo (String) nombre del metodo
      * @param object Objeto que convertiremos en JSON
      */
-    public void printResponse(String nombreMetodo, Object object){
+    public void printResponse(CustomLogger logger, String nombreMetodo, Object object){
         System.out.println("SYSOUT LEO: "+getResponseJson(nombreMetodo, object));
         logger.info("LOG LEO: "+getResponseJson(nombreMetodo, object));
     }
@@ -122,9 +124,10 @@ public class PrintLogger {
      * Metodo que permite imprimir un RESPONSE de un objeto en json
      *
      * @autor Leonardo Solano
+     * @param logger (CustomLogger) Objeto logger
      * @param object Objeto que convertiremos en JSON
      */
-    public void printError(Object object){
+    public void printError(CustomLogger logger, Object object){
         System.err.println("SYSOUT LEO: "+convertObjectToJson(object));
         logger.error(convertObjectToJson(object));
     }
@@ -138,6 +141,6 @@ public class PrintLogger {
      */
     public void printError(ErrorData errorData, Exception exception){
         System.err.println(convertObjectToJson(errorData));
-        logger.error(errorData, exception);
+//        logger.error(errorData, exception);
     }
 }

@@ -16,7 +16,8 @@
         <module>LearningEnglish.Test</module>
         <module>LearningEnglish.Util.Exam</module>
         <module>CustomLogger</module>
-    </modules>
+    <module>LearningEnglish.CacheManager</module>
+  </modules>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
