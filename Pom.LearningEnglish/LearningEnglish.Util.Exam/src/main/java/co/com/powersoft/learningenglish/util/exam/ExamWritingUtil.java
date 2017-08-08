@@ -100,7 +100,8 @@ public class ExamWritingUtil {
                 Question exam = new Question();
                 
                 exam.setIdQuestion(numQuestion);
-                exam.setQuestion(vocabulary.getSpanishValue());
+                exam.setQuestionText(vocabulary.getSpanishValue());
+                exam.setQuestionAudio(vocabulary.getSpanishSound());
                 exam.setAnswer(vocabulary.getEnglishValue());
                 
                 listExamWriting.add(exam);
@@ -131,7 +132,8 @@ public class ExamWritingUtil {
                 Question exam = new Question();
                 
                 exam.setIdQuestion(numQuestion);
-                exam.setQuestion(vocabulary.getEnglishValue());
+                exam.setQuestionText(vocabulary.getEnglishValue());
+                exam.setQuestionAudio(vocabulary.getEnglishSound());
                 exam.setAnswer(vocabulary.getSpanishValue());
                 
                 listExamWriting.add(exam);

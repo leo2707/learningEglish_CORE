@@ -5,15 +5,14 @@
  */
 package co.com.powersoft.learningenglish.util.exam;
 
+import co.com.powersoft.learningenglish.bean.Option;
 import co.com.powersoft.learningenglish.bean.Question;
 import co.com.powersoft.learningenglish.bean.QuestionMultichoice;
 import co.com.powersoft.learningenglish.bean.Vocabulary;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -108,40 +107,42 @@ public class ExamMultichoiceUtil {
             if (numQuestion <= countQestions) {
 
                 QuestionMultichoice questionMultichoice = new QuestionMultichoice();
-                Question exam = new Question();
+                Question question = new Question();
 
                 Collections.shuffle(listVocabulary2);
                 int numRandom = (int) (Math.random() * 4);
-                exam.setIdQuestion(numQuestion);
-                exam.setQuestion(vocabulary.getSpanishValue());
+                question.setIdQuestion(numQuestion);
+                question.setQuestionText(vocabulary.getSpanishValue());
+                question.setQuestionAudio(vocabulary.getSpanishSound());
 
                 int answer = 0;
                 boolean sw = false;
-                Map<String, String> mapOption = new HashMap<>();
+                //Map<String, String> mapOption = new HashMap<>();
+                List<Option> options = new ArrayList<>();
 
-                for (Vocabulary vocabulary2 : listVocabulary) {
+                for (Vocabulary vocabulary2 : listVocabulary2) {
                     if (answer < 4) {
                         if (sw == false && answer == numRandom) {
-                            exam.setAnswer(vecLetters[answer]);
-                            mapOption.put(vecLetters[answer], vocabulary.getEnglishValue());
+                            question.setAnswer(vecLetters[answer]);
+                            options.add(new Option(vecLetters[answer], vocabulary.getEnglishValue()));
 //                            listOptions.add(vecLetters[answer] + ") " + vocabulary.getEnglishValue());
                             sw = true;
                             answer++;
                         } else {
                             if (!vocabulary.getEnglishValue().equals(vocabulary2.getEnglishValue())) {
-                                mapOption.put(vecLetters[answer], vocabulary2.getEnglishValue());
+                                options.add(new Option(vecLetters[answer], vocabulary2.getEnglishValue()));
 //                                listOptions.add(vecLetters[answer] + ") " + vocabulary2.getEnglishValue());
                                 answer++;
                             }
                         }
-                        questionMultichoice.setOptions(mapOption);
+                        questionMultichoice.setOptions(options);
                     } else {
                         break;
                     }
                 }
 
                 numQuestion++;
-                questionMultichoice.setExam(exam);
+                questionMultichoice.setQuestion(question);
                 listExamMultichoice.add(questionMultichoice);
             } else {
                 break;
@@ -176,40 +177,42 @@ public class ExamMultichoiceUtil {
             if (numQuestion <= countQestions) {
 
                 QuestionMultichoice questionMultichoice = new QuestionMultichoice();
-                Question exam = new Question();
+                Question question = new Question();
 
                 Collections.shuffle(listVocabulary2);
                 int numRandom = (int) (Math.random() * 4);
-                exam.setIdQuestion(numQuestion);
-                exam.setQuestion(vocabulary.getEnglishValue());
+                question.setIdQuestion(numQuestion);
+                question.setQuestionText(vocabulary.getEnglishValue());
+                question.setQuestionAudio(vocabulary.getEnglishSound());
 
                 int answer = 0;
                 boolean sw = false;
-                Map<String, String> mapOption = new HashMap<>();
+                //Map<String, String> mapOption = new HashMap<>();
+                List<Option> options = new ArrayList<>();
 
-                for (Vocabulary vocabulary2 : listVocabulary) {
+                for (Vocabulary vocabulary2 : listVocabulary2) {
                     if (answer < 4) {
                         if (sw == false && answer == numRandom) {
-                            exam.setAnswer(vecLetters[answer]);
-                            mapOption.put(vecLetters[answer], vocabulary.getSpanishValue());
+                            question.setAnswer(vecLetters[answer]);
+                            options.add(new Option(vecLetters[answer], vocabulary.getSpanishValue()));
 //                            listOptions.add(vecLetters[answer] + ") " + vocabulary.getSpanishValue());
                             sw = true;
                             answer++;
                         } else {
                             if (!vocabulary.getEnglishValue().equals(vocabulary2.getEnglishValue())) {
-                                mapOption.put(vecLetters[answer], vocabulary2.getSpanishValue());
+                                options.add(new Option(vecLetters[answer], vocabulary2.getSpanishValue()));
 //                                listOptions.add(vecLetters[answer] + ") " + vocabulary2.getSpanishValue());
                                 answer++;
                             }
                         }
-                        questionMultichoice.setOptions(mapOption);
+                        questionMultichoice.setOptions(options);
                     } else {
                         break;
                     }
                 }
 
                 numQuestion++;
-                questionMultichoice.setExam(exam);
+                questionMultichoice.setQuestion(question);
                 listExamMultichoice.add(questionMultichoice);
             } else {
                 break;

@@ -10,16 +10,18 @@ public class Question  implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
 
     private int idQuestion;
-    private String question;
+    private String questionText;
+    private String questionAudio;
     private String answer;
     private String check;
 
     public Question() {
     }
 
-    public Question(int idQuestion, String question, String answer, String check) {
+    public Question(int idQuestion, String questionText, String questionAudio, String answer, String check) {
         this.idQuestion = idQuestion;
-        this.question = question;
+        this.questionText = questionText;
+        this.questionAudio = questionAudio;
         this.answer = answer;
         this.check = check;
     }    
@@ -32,12 +34,20 @@ public class Question  implements java.io.Serializable {
         this.idQuestion = idQuestion;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public String getQuestionAudio() {
+        return questionAudio;
+    }
+
+    public void setQuestionAudio(String questionAudio) {
+        this.questionAudio = questionAudio;
     }
 
     public String getAnswer() {

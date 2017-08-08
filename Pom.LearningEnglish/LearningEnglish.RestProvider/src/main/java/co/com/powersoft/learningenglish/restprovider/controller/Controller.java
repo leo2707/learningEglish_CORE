@@ -298,7 +298,18 @@ public class Controller {
 
         try {
             if(request.getVocabularyType().equals("VOCABULARY")){
-                vocabulary = new ArrayList<>();
+                //VOCABULARY
+                GetVocabularyRq getVocabularyRq = new GetVocabularyRq();
+                getVocabularyRq.setLessonId(request.getLessonId());
+                getVocabularyRq.setRequestId(request.getRequestId());
+                GetVocabularyRs getVocabularyRs = getVocabulary(getVocabularyRq);
+                
+                //Mapping
+                vocabulary = getVocabularyRs.getListVocabulary().stream()
+                    .map(obj -> new Vocabulary(
+                    obj.getEnglishValue(), obj.getEnglishPronunciation(), obj.getEnglishSound(),
+                    obj.getSpanishValue(), obj.getSpanishPronunciation(), obj.getSpanishSound()
+                )).collect(Collectors.toList());
             } else {
                 //VERBS
                 GetVerbsRq getVerbsRq = new GetVerbsRq();
@@ -315,13 +326,14 @@ public class Controller {
                 
             }
             
+            //Create Exam
             List<Question> questions = ExamWritingUtil.getExam(vocabulary,
                     request.getConfigExam().getNumberOfQuestion(), 
                     request.getConfigExam().getQuestionLanguaje(), 
                     request.getConfigExam().getOrderQuestions());
 
             response.setQuestions(questions);
-        } catch (Exception e) {
+        } catch (GeneralException e) {
             throw new GeneralException(GeneralException.EXCEPTION_TYPE_GENERIC, OPERACION, request.getRequestId(), e);
         }
         return response;
@@ -346,7 +358,18 @@ public class Controller {
 
         try {
             if(request.getVocabularyType().equals("VOCABULARY")){
-                vocabulary = new ArrayList<>();
+                //VOCABULARY
+                GetVocabularyRq getVocabularyRq = new GetVocabularyRq();
+                getVocabularyRq.setLessonId(request.getLessonId());
+                getVocabularyRq.setRequestId(request.getRequestId());
+                GetVocabularyRs getVocabularyRs = getVocabulary(getVocabularyRq);
+                
+                //Mapping
+                vocabulary = getVocabularyRs.getListVocabulary().stream()
+                    .map(obj -> new Vocabulary(
+                    obj.getEnglishValue(), obj.getEnglishPronunciation(), obj.getEnglishSound(),
+                    obj.getSpanishValue(), obj.getSpanishPronunciation(), obj.getSpanishSound()
+                )).collect(Collectors.toList());
             } else {
                 //VERBS
                 GetVerbsRq getVerbsRq = new GetVerbsRq();
@@ -369,7 +392,7 @@ public class Controller {
                     request.getConfigExam().getOrderQuestions());
 
             response.setQuestions(questions);
-        } catch (Exception e) {
+        } catch (GeneralException e) {
             throw new GeneralException(GeneralException.EXCEPTION_TYPE_GENERIC, OPERACION, request.getRequestId(), e);
         }
         return response;

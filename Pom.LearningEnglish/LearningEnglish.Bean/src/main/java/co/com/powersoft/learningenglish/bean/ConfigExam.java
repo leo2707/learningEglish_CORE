@@ -8,6 +8,7 @@ public class ConfigExam implements java.io.Serializable {
 
     private String questionLanguaje;
     private String typeQuestion;
+    private String typeAnswer;
     private int numberOfQuestion;
     private String orderQuestions;
     private String time;
@@ -23,6 +24,14 @@ public class ConfigExam implements java.io.Serializable {
         this.questionLanguaje = questionLanguaje;
     }
 
+    public String getTypeAnswer() {
+        return typeAnswer;
+    }
+
+    public void setTypeAnswer(String typeAnswer) {
+        this.typeAnswer = typeAnswer;
+    }
+    
     public String getTypeQuestion() {
         return typeQuestion;
     }
